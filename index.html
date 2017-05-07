@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JsonFormer</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <style type="text/css">
+        body {
+            padding: 10px;
+        }
+        
+        #exTab2 h3 {
+            color: white;
+            background-color: #428bca;
+            padding: 5px 15px;
+        }
+        /* remove border radius for the tab */
+        
+        #downloadPath {
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <hr></hr>
+    <div class="container">
+        <h2>JsonFormer</h2>
+    </div>
+
+    <div id="exTab2" class="container">
+        <div style="display:flex">
+            <input type="button" id="currentParent" name="" hidden onClick="gotoParent()" value="up" />
+            <div id="currentPath"></div>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#1" data-toggle="tab">Form</a>
+            </li>
+            <li><a href="#2" data-toggle="tab">Json</a>
+            </li>
+            <li><a href="#3" data-toggle="tab">Options</a>
+            </li>
+            <li><a href="#4" data-toggle="tab">Roadmap</a>
+            </li>
+        </ul>
+
+        <div class="tab-content ">
+            <div class="tab-pane active" id="1">
+                <h3>Here is were the input form appears</h3>
+
+                <div id="formOutput"></div>
+            </div>
+            <div class="tab-pane" id="2">
+                <h3>Here is were you can view an edit json source</h3>
+                <div style="display:flex">
+                    <input type="text" id="downloadPath" />
+                    <input type="button" id="downloadButton" name="" onClick="downloadJson()" value="download" />
+                </div>
+                <div class="form-group">
+                    <label for="comment">json source:</label>
+                    <textarea class="form-control json" rows="30" id="jsonSrouce-TextArea">
+                    </textarea>
+                    <div id="jsonError"></div>
+                </div>
+            </div>
+            <div class="tab-pane" id="3">
+                <h3>Here is were the options will be</h3>
+
+
+                <input type="file" id="files" name="files[]" multiple />
+                <output id="list"></output>
+                <script>
+                    function handleFileSelect(evt) {
+                        var files = evt.target.files; // FileList object
+
+                        // files is a FileList of File objects. List some properties.
+                        var output = [];
+                        for (var i = 0, f; f = files[i]; i++) {
+                            output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                                f.size, ' bytes, last modified: ',
+                                f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                                '</li>');
+                        }
+                        document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+                    }
+
+                    document.getElementById('files').addEventListener('change', handleFileSelect, false);
+                </script>
+
+
+
+                <div style="display:flex">
+                    <input type="button" id="importButton" name="" onClick="importJson()" value="import" />
+
+                    <input type="button" id="exportButton" name="" onClick="exportJson()" value="export" />
+                </div>
+            </div>
+            <div class="tab-pane" id="4">
+                <h3>This is a list of features to implement</h3>
+                <ul>
+                    <li>edit button on form</li>
+                    <li>delete button on form</li>
+                    <li>add new button on form</li>
+                    <li>drag and drop on form</li>
+                    <li>syntax highlight in json</li>
+                    <li>folding in json</li>
+                    <li>import button json</li>
+                    <li>download json</li>
+                    <li>copy to clipboard json</li>
+                    <li>save options to local chrome</li>
+                    <li>option to view all children when small in form</li>
+                    <li>option to view all children in form</li>
+                    <li>option to view all json in form</li>
+                    <li>view overall tree of json</li>
+                    <li>use icons for buttons</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+        ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="functions.js"></script>
+    <script src="buttonFunctions.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
